@@ -1,56 +1,51 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Departures from './Departures'
+import Arrivals from './Arrivals'
+import Item from './Item'
 
 class ScheduleContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      arrivals: [],
+      departures: [],
+      buttonText: 'Departures',
+      showArrivalsTable: true,
+      showDeparturesTable: false
     }
+
+    this.arrivalsUrl   = 'http://localhost:3003/api/v1/arrivals.json'
+    this.departuresUrl = 'http://localhost:3003/api/v1/departures.json'
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3003/api/v1/arrivals.json')
+    axios.get(this.arrivalsUrl)
     .then(response => {
-      console.log(response)
-      this.setState({ items: response.data })
-    })
+      this.setState({ arrivals: response.data })
+    }).then(axios.get(this.departuresUrl)
+    .then(response => {
+      this.setState({ departures: response.data })
+    }))
     .catch(error => console.log(error))
+  }
+
+  toggleTables = () => {
+    if (this.state.buttonText == 'Departures') {
+      this.setState({ buttonText: 'Arrivals', showDeparturesTable: true, showArrivalsTable: false })
+    } else {
+      this.setState({ buttonText: 'Departures', showDeparturesTable: false, showArrivalsTable: true })
+    }
   }
 
   render() {
     return (
       <div className="schedule_container">
-        <table>
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Expected Time</th>
-              <th>Airline</th>
-              <th>Destination</th>
-              <th>Flight No</th>
-              <th>Gate</th>
-              <th>Terminal</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.state.items.map(item => {
-              return (
-                <tr>
-                  <td>{ item.time }</td>
-                  <td>{ item.expected_time }</td>
-                  <td>{ item.airline_name }</td>
-                  <td>{ item.destination }</td>
-                  <td>{ item.flight_no }</td>
-                  <td>{ item.gate }</td>
-                  <td>{ item.terminal }</td>
-                  <td>{ item.status }</td>
-                </tr>
-              )
-            }) }
-          </tbody>
-        </table>
+        <button className='show_arrivals' onClick={this.toggleTables}>See {this.state.buttonText}</button>
+        { this.state.showArrivalsTable ? <Arrivals arrivals={this.state.arrivals} /> : null }
+
+        { this.state.showDeparturesTable ? <Departures departures={this.state.departures} /> : null }
+
       </div>
     );
   }
