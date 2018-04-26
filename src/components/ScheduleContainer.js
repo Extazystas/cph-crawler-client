@@ -22,6 +22,13 @@ class ScheduleContainer extends Component {
   }
 
   componentDidMount() {
+    setInterval(() => {
+      this.fetchApiData()
+    }, 30000)
+    this.fetchApiData()
+  }
+
+  fetchApiData = () => {
     axios.get(this.arrivalsUrl)
     .then(response => {
       this.setState({ loading: false, arrivals: response.data })
