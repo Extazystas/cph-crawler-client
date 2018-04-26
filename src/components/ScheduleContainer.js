@@ -3,11 +3,13 @@ import axios from 'axios'
 import Departures from './Departures'
 import Arrivals from './Arrivals'
 import Item from './Item'
+import spinner from './../spinner.svg'
 
 class ScheduleContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
       arrivals: [],
       departures: [],
       buttonText: 'Departures',
@@ -22,7 +24,7 @@ class ScheduleContainer extends Component {
   componentDidMount() {
     axios.get(this.arrivalsUrl)
     .then(response => {
-      this.setState({ arrivals: response.data })
+      this.setState({ loading: false, arrivals: response.data })
     }).then(axios.get(this.departuresUrl)
     .then(response => {
       this.setState({ departures: response.data })
@@ -39,6 +41,11 @@ class ScheduleContainer extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <img src={spinner} className="spinner" alt="spinner" />
+      )
+    }
     return (
       <div className="schedule_container">
         <button className='show_arrivals' onClick={this.toggleTables}>See {this.state.buttonText}</button>
