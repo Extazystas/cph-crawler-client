@@ -4,7 +4,7 @@ import ItemsTableHead from './ItemsTableHead'
 
 const Arrivals = ({arrivals}) =>
 <div>
-  <h2>Arrivals</h2>
+  <h2>Arrivals &#128748;</h2>
   <table>
     <ItemsTableHead />
     <tbody>
