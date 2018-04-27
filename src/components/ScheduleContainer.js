@@ -15,8 +15,8 @@ class ScheduleContainer extends Component {
       showDeparturesTable: false
     }
 
-    this.arrivalsUrl   = 'http://localhost:3003/api/v1/arrivals.json'
-    this.departuresUrl = 'http://localhost:3003/api/v1/departures.json'
+    this.arrivalsUrl   = process.env.REACT_APP_ARRIVALS_URL
+    this.departuresUrl = process.env.REACT_APP_DEPARTURES_URL
   }
 
   componentDidMount() {
