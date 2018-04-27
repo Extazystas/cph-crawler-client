@@ -15,6 +15,8 @@ class ScheduleContainer extends Component {
       showDeparturesTable: false
     }
 
+    console.log(process.env.REACT_APP_ARRIVALS_URL)
+    console.log(process.env.REACT_APP_DEPARTURES_URL)
     this.arrivalsUrl   = process.env.REACT_APP_ARRIVALS_URL
     this.departuresUrl = process.env.REACT_APP_DEPARTURES_URL
   }
