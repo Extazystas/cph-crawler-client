@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ItemsTableHead = () =>
-  <thead>
+  <thead className='items_header'>
     <tr>
       <th>Time</th>
       <th>Expected Time</th>
