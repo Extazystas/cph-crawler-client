@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Departures from './Departures'
-import Arrivals from './Arrivals'
-import Item from './Item'
+import ItemsTable from './ItemsTable'
 import spinner from './../spinner.svg'
 
 class ScheduleContainer extends Component {
@@ -22,9 +20,10 @@ class ScheduleContainer extends Component {
   }
 
   componentDidMount() {
+    // Fetch schedule data interval 60 seconds
     setInterval(() => {
       this.fetchApiData()
-    }, 30000)
+    }, 60000)
     this.fetchApiData()
   }
 
@@ -53,13 +52,15 @@ class ScheduleContainer extends Component {
         <img src={spinner} className="spinner" alt="spinner" />
       )
     }
+
     return (
       <div className="schedule_container">
-        <button className='show_arrivals' onClick={this.toggleTables}>See {this.state.buttonText}</button>
-        { this.state.showArrivalsTable ? <Arrivals arrivals={this.state.arrivals} /> : null }
+        <button className='show_arrivals' onClick={this.toggleTables}>
+          See {this.state.buttonText}
+        </button>
 
-        { this.state.showDeparturesTable ? <Departures departures={this.state.departures} /> : null }
-
+        { this.state.showArrivalsTable ? <ItemsTable arrivals={true}  data={this.state.arrivals} /> : null }
+        { this.state.showDeparturesTable ? <ItemsTable arrivals={false} data={this.state.departures} /> : null }
       </div>
     );
   }

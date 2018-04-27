@@ -1,7 +1,7 @@
 body {
   font-family: 'Tahoma';
-  background-color: #808080;
-  color: #eee;
+  background-color: #999;
+  color: #fff;
   font-size: 16px;
 }
 .App {
@@ -14,7 +14,7 @@ body {
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #000;
   height: 80px;
   padding: 10px;
   color: white;
@@ -33,11 +33,12 @@ body {
   width: 900px;
   padding: 10px;
 }
-
-.schedule_container table td, .schedule_container table th {
-  padding: 5px;
-  border: 1px solid #ccc;
+.ReactTable {
+  -webkit-box-shadow: 3px 3px 10px 2px #222;
+  -moz-box-shadow:    3px 3px 10px 2px #222;
+  box-shadow:         3px 3px 10px 2px #222;
 }
+
 .schedule_container button {
   border-radius: none;
   background-color: #000;
@@ -56,9 +57,40 @@ body {
 .spinner {
   margin: 50px auto;
 }
-.items_header {
+.reset_filter {
+  text-align: right;
+  margin-bottom: 10px;
+}
+.reset_filter a {
+  background-color: #000;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 3px 5px;
+  text-decoration: none;
+}
+.reset_filter a:hover {
+  text-decoration: underline;
+}
+.rt-th.rt-resizable-header.-cursor-pointer:focus {
+  outline: none;
+}
+.rt-thead.-header {
   background-color: #ddd;
   color: #222;
+  font-weight: bold;
+}
+.rt-th.-cursor-pointer div, .ReactTable .rt-th, .ReactTable .rt-td {
+  word-break: break-word;
+  white-space: initial;
+  margin: auto;
+}
+.ReactTable.-striped .rt-tr {
+  border: 1px solid #ccc;
+}
+.ReactTable .rt-tbody .rt-td {
+  border-right: 1px solid #ccc;
+  padding: 5px;
+  color: #eee;
 }
 
 @keyframes App-logo-spin {
