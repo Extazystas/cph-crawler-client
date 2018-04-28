@@ -10,6 +10,7 @@ class ItemsTable extends Component {
       filtered: []
     }
   }
+
   render() {
     const tableTitle = () =>
     this.state.showArrivals ? <h2>Arrivals &#128748;</h2> : <h2>Departures &#128747;</h2>

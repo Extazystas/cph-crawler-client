@@ -23,10 +23,24 @@ class ScheduleContainer extends Component {
 
   componentDidMount() {
     // Fetch schedule data interval 60 seconds
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.fetchApiData()
+      this.reRenderItems()
     }, 60000)
     this.fetchApiData()
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  reRenderItems = () => {
+    // TODO Refactor that temp stuff
+    // Hard re-render for schedule table
+    let show_arrivals   = this.state.showArrivalsTable
+    let show_departures = this.state.showDeparturesTable
+    this.setState({ showArrivalsTable: !show_arrivals, showDeparturesTable: !show_departures })
+    this.setState({ showArrivalsTable: show_arrivals, showDeparturesTable: show_departures })
   }
 
   fetchApiData = () => {
